@@ -37,11 +37,12 @@ To run this project, you will need to add the following environment variables to
 `JWT_SECRET`
 `MONGO_URI`
 
-
 ## Project Features
 <details>
 <summary>Click to expand project features</summary>
-- **User Authentication**: Allow users to sign up, log in, and log out. Use authentication to secure user-specific data and actions.
+
+**User Authentication :**
+ Allow users to sign up, log in, and log out. Use authentication to secure user-specific data and actions.
 
 **Boards:**
 - Create boards.
