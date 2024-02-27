@@ -3,7 +3,7 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from './auth.schema';
-import { JwtModule } from '../jwt/jwt.module';
+import { JwtModule } from '../jwt/jwt.module'
 require('dotenv').config()
 @Module({
   imports: [

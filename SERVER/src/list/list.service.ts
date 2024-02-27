@@ -4,6 +4,8 @@ import { List } from './list.schema';
 import { Model } from 'mongoose';
 import { Board } from 'src/board/board.schema';
 import { Types } from 'mongoose';
+import { JwtDto } from 'src/jwt/jwt.dto';
+import { ListDto } from './list.dto';
 
 @Injectable()
 export class ListService {
@@ -13,7 +15,7 @@ export class ListService {
     @InjectModel(Board.name)
     private boardModel: Model<Board>,
   ) {}
-  async CreateList(list: List, boardId: string): Promise<List> {
+  async CreateList(list: ListDto, boardId: string): Promise<List> {
     const listObj = await this.listModel.create({
       board: boardId,
       ...list,
@@ -29,8 +31,8 @@ export class ListService {
     await board.save();
     return listObj;
   }
-  async GetAllLists(boardId: string): Promise<any[]> {
-    const board = await this.boardModel.findById(boardId).populate('lists');
+  async GetAllLists(boardId: string , user : JwtDto): Promise<any[]> {
+    const board = await this.boardModel.findById(boardId , user.id).populate('lists');
     if (!board) {
       throw new NotFoundException('Board not found');
     }
@@ -46,7 +48,7 @@ export class ListService {
     }
     return list;
   }
-  async UpdateList(listId: string, list: List): Promise<List> {
+  async UpdateList(listId: string, list: ListDto): Promise<List> {
     const updatedList = await this.listModel.findByIdAndUpdate(listId, list, {
       new: true,
     });
@@ -55,9 +57,14 @@ export class ListService {
     }
     return updatedList;
   }
-  async DeleteList(listId: string, boardId: string): Promise<any> {
-    const deletedList = await this.listModel.findByIdAndDelete(listId);
+  async DeleteList(listId: string): Promise<any> {
+    const deletedList = await this.listModel.findById(listId);
     if (!deletedList) {
+      throw new NotFoundException('List not found');
+    }
+    const boardId = deletedList.board;
+    const DeletedList = await this.listModel.findByIdAndDelete(listId);
+    if (!DeletedList) {
       throw new NotFoundException('List not found');
     }
     const board = await this.boardModel.findById(boardId);

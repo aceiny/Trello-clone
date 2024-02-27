@@ -26,10 +26,11 @@ export class AuthService {
         const {password} = authDto
         try{
             const salt = bcrypt.genSaltSync(10);
-            const HashedPass = bcrypt.hashSync(password, salt);
+            const HashPass = bcrypt.hashSync(password, salt);
+            console.log(HashPass , salt)
             const user = await this.userModel.create({
-                password : HashedPass,
                 ...authDto,
+                password : HashPass
             })
             if(!user){
                 throw new InternalServerErrorException('User not created');
