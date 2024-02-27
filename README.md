@@ -38,52 +38,52 @@ To run this project, you will need to add the following environment variables to
 `MONGO_URI`
 
 
+## Project Features
 <details>
 <summary>Click to expand project features</summary>
-Project Features
-User Authentication: Allow users to sign up, log in, and log out. Use authentication to secure user-specific data and actions.
-Boards:
+- **User Authentication**: Allow users to sign up, log in, and log out. Use authentication to secure user-specific data and actions.
 
-Create boards.
-View all boards a user has access to.
-Update board details (name, description, etc.).
-Delete boards (with appropriate permissions).
-Lists:
+**Boards:**
+- Create boards.
+- View all boards a user has access to.
+- Update board details (name, description, etc.).
+- Delete boards (with appropriate permissions).
 
-Create lists within a board.
-Reorder lists within a board.
-Update list details (name, color, etc.).
-Delete lists (with appropriate permissions).
-Cards:
+**Lists:**
+- Create lists within a board.
+- Reorder lists within a board.
+- Update list details (name, color, etc.).
+- Delete lists (with appropriate permissions).
 
-Create cards within a list.
-Drag and drop cards between lists.
-Update card details (name, description, due date, etc.).
-Assign users to cards.
-Add labels to cards.
-Add attachments to cards.
-Add comments to cards.
-Delete cards (with appropriate permissions).
-Real-time Updates: Use WebSockets or a similar technology to provide real-time updates when changes are made to boards, lists, or cards.
+**Cards:**
+- Create cards within a list.
+- Drag and drop cards between lists.
+- Update card details (name, description, due date, etc.).
+- Assign users to cards.
+- Add labels to cards.
+- Add attachments to cards.
+- Add comments to cards.
+- Delete cards (with appropriate permissions).
 
-Collaboration:
+**Real-time Updates**: Use WebSockets or a similar technology to provide real-time updates when changes are made to boards, lists, or cards.
 
-Allow multiple users to collaborate on the same board.
-Implement permissions to control who can view, edit, and delete boards, lists, and cards.
-Search: Implement a search functionality to quickly find boards, lists, or cards based on keywords.
+**Collaboration:**
+- Allow multiple users to collaborate on the same board.
+- Implement permissions to control who can view, edit, and delete boards, lists, and cards.
 
-Notifications:
+**Search**: Implement a search functionality to quickly find boards, lists, or cards based on keywords.
 
-Notify users of important events (e.g., when they are added to a board, when a card is assigned to them, etc.).
-Allow users to manage their notification settings.
-Archiving: Allow users to archive boards, lists, or cards to keep their workspace organized.
+**Notifications:**
+- Notify users of important events (e.g., when they are added to a board, when a card is assigned to them, etc.).
+- Allow users to manage their notification settings.
 
-Activity Log: Keep a log of all actions performed on boards, lists, and cards, allowing users to track changes and revert if needed.
+**Archiving**: Allow users to archive boards, lists, or cards to keep their workspace organized.
 
-Mobile Responsiveness: Ensure the application is responsive and usable on mobile devices.
+**Activity Log**: Keep a log of all actions performed on boards, lists, and cards, allowing users to track changes and revert if needed.
 
-Data Backup: Implement regular backups to prevent data loss.
+**Mobile Responsiveness**: Ensure the application is responsive and usable on mobile devices.
 
-Performance Optimization: Optimize the application for performance, especially for operations involving large numbers of boards, lists, or cards.
+**Data Backup**: Implement regular backups to prevent data loss.
 
+**Performance Optimization**: Optimize the application for performance, especially for operations involving large numbers of boards, lists, or cards.
 </details>
