@@ -8,13 +8,6 @@ import { RolesGuard } from '../jwt/role.guard';
 @Controller('auth')
 export class AuthController {
     constructor(private readonly authService : AuthService){}
-
-    @Get()
-    @UseGuards(AuthGuard())
-    CheckGuards(@Req() req){
-        Logger.log(req.user)
-        return 'guards'
-    }
     
     @Post('/signup')
     @UsePipes(ValidationPipe)

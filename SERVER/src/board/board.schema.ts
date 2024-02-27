@@ -7,8 +7,13 @@ export class Board extends Document {
     name : string;
     @Prop()
     description : string;
-    @Prop()
+    @Prop({default : null})
     backgroundColor : string;
+    @Prop({
+        type : Types.ObjectId,
+        ref : 'User'
+    })
+    user : Types.ObjectId
     @Prop({
         type : Types.ObjectId,
         ref : 'List'

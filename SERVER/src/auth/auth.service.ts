@@ -17,18 +17,19 @@ export class AuthService {
         const users = await this.userModel.find()
         return users
     }
+
     async Signup(authDto : authDto) : Promise<User> {
         const exist = await this.userModel.findOne({ username : authDto.username })
         if(exist){
             throw new ConflictException('Username already exist')
         }
-        const { username , password} = authDto
+        const {password} = authDto
         try{
             const salt = bcrypt.genSaltSync(10);
             const HashedPass = bcrypt.hashSync(password, salt);
             const user = await this.userModel.create({
-                username,
                 password : HashedPass,
+                ...authDto,
             })
             if(!user){
                 throw new InternalServerErrorException('User not created');
@@ -46,7 +47,9 @@ export class AuthService {
         if(!bcrypt.compareSync(authDto.password, user.password)){
             throw new UnauthorizedException('Password not match')
         }
-        return { Token : this.jwtService.sign({username : user.username , id : user._id }) }
+        return { 
+            Token : this.jwtService.sign({username : user.username , id : user._id })
+        }
     }
 
 }
