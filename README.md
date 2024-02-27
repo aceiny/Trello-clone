@@ -3,6 +3,11 @@
 this is full stack trello task managment clone built using nest js for the backend ...
 
 
+## schema
+you can find a full description of the schema design i used here 
+```bash 
+https://dbdiagram.io/d/65ddfd8d5cd0412774ef94f2
+```
 ## Clone
 ```bash
 $ git clone https://github.com/aceiny/Trello-clone
