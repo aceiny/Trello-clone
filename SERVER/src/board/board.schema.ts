@@ -18,7 +18,7 @@ export class Board extends Document {
         type : Types.ObjectId,
         ref : 'List'
     })
-    lists : Types.ObjectId[]
+    lists : Types.ObjectId[];
 
 }
 

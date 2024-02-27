@@ -9,6 +9,9 @@ import { Board, BoardSchema } from './board.schema';
     MongooseModule.forFeature([{name : Board.name, schema : BoardSchema}]),
   ],
   controllers: [BoardController],
-  providers: [BoardService]
+  providers: [BoardService],
+  exports : [
+    MongooseModule.forFeature([{name : Board.name, schema : BoardSchema}]),
+  ]
 })
 export class BoardModule {}

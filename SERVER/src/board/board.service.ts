@@ -38,4 +38,24 @@ export class BoardService {
         }
         return board
     }
+    async UpdateBoard(user : JwtDto , boardId : string , board : Board) : Promise<Board> {
+        const updatedBoard = await this.boardModel.findOneAndUpdate({
+            user : user.id,
+            _id : boardId
+        },board,{new : true})
+        if(!updatedBoard){
+            throw new NotFoundException('Board not found')
+        }
+        return updatedBoard
+    }
+    async DeleteBoard(user : JwtDto , boardId : string) : Promise<Board> {
+        const deletedBoard = await this.boardModel.findOneAndDelete({
+            user : user.id,
+            _id : boardId
+        })
+        if(!deletedBoard){
+            throw new NotFoundException('Board not found')
+        }
+        return deletedBoard
+    }
 }
