@@ -22,14 +22,13 @@ export class AuthService {
         if(exist){
             throw new ConflictException('Username already exist')
         }
-        const { username , password , role } = authDto
+        const { username , password} = authDto
         try{
             const salt = bcrypt.genSaltSync(10);
             const HashedPass = bcrypt.hashSync(password, salt);
             const user = await this.userModel.create({
                 username,
                 password : HashedPass,
-                role 
             })
             if(!user){
                 throw new InternalServerErrorException('User not created');
@@ -47,7 +46,7 @@ export class AuthService {
         if(!bcrypt.compareSync(authDto.password, user.password)){
             throw new UnauthorizedException('Password not match')
         }
-        return { Token : this.jwtService.sign({username : user.username , id : user._id , role : user.role}) }
+        return { Token : this.jwtService.sign({username : user.username , id : user._id }) }
     }
 
 }

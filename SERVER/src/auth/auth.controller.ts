@@ -2,9 +2,8 @@ import { Body, Controller, Get, Logger, Post, Req, UseGuards, UsePipes, Validati
 import { AuthService } from './auth.service';
 import { authDto } from './auth.dto';
 import { AuthGuard } from '@nestjs/passport';
-import { GetUser } from './get-user.decorator';
-import { Roles } from './roles.decorator';
-import { RolesGuard } from './role.guard';
+import { Roles } from '../jwt/roles.decorator';
+import { RolesGuard } from '../jwt/role.guard';
 
 @Controller('auth')
 export class AuthController {
