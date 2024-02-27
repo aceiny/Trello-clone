@@ -42,7 +42,8 @@ To run this project, you will need to add the following environment variables to
 <summary>Click to expand project features</summary>
 
 **User Authentication :**
- Allow users to sign up, log in, and log out. Use authentication to secure user-specific data and actions.
+- Allow users to sign up, log in, and log out. Use authentication to secure user-specific data and actions.
+- Allow users to update account informations
 
 **Boards:**
 - Create boards.
