@@ -1,5 +1,9 @@
+import { IsNotEmpty, IsString } from "class-validator";
+
 export class ListDto {
+    @IsString()
+    @IsNotEmpty()
     name: string;
-    cards: string[];
-    board: string;
+    
+    description: string;
 }

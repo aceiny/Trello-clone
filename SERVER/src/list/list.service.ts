@@ -82,9 +82,16 @@ export class ListService {
     listId: string,
     position: number,
   ): Promise<any> {
+    position = position - 1;
     const board = await this.boardModel.findById(boardId);
     if (!board) {
       throw new NotFoundException('Board not found');
+    }
+    if(position < 0){
+        position = 0
+    }
+    if(position > board.lists.length){
+        position = board.lists.length - 1
     }
     board.lists = board.lists.filter(
       (list) => list.toString() != listId.toString(),

@@ -7,6 +7,7 @@ import { List, ListSchema } from './list.schema';
 import { JwtModule } from '../jwt/jwt.module'
 @Module({
   imports: [
+    JwtModule,
     MongooseModule.forFeature([{ name: List.name, schema: ListSchema }]),
     BoardModule,
   ],

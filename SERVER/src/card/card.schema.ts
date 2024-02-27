@@ -7,7 +7,7 @@ const comment = raw({
     date : {type : Date}
 });
 
-@Schema()
+@Schema({timestamps : true})
 export class Card extends Document {
     @Prop()
     name : string;

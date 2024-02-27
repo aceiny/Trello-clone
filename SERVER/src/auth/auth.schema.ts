@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { ObjectId } from "bson";
 import { Document, Types } from "mongoose";
 
-@Schema()
+@Schema({timestamps : true})
 export class User extends Document {
     @Prop({unique : true})
     username: string;

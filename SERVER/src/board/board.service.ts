@@ -31,7 +31,7 @@ export class BoardService {
         const board = await this.boardModel.findOne({
             user : user.id,
             _id : boardId
-        })
+        }).populate('lists')
         if(!board) {
             throw new NotFoundException('Board not found')
         }
