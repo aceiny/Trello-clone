@@ -59,13 +59,19 @@ export class CardService {
     return updatedCard;
   }
   async DeleteCard(cardId: string): Promise<List> {
-    const deletedCard = await this.cardModel.findByIdAndDelete(cardId);
-    if (!deletedCard) {
+    const Card = await this.cardModel.findById(cardId);
+    if (!Card) {
       throw new NotFoundException('Card not found');
     }
-    const list = await this.listModel.findOne({ cards: cardId });
+    const listId = Card.list;
+    const list = await this.listModel.findById(listId);
     if (!list) {
       throw new NotFoundException('List not found');
+    }
+    try{
+      await this.cardModel.findByIdAndDelete(cardId);
+    }catch(err) {
+      throw new NotFoundException('Card not found');
     }
     list.cards = list.cards.filter((card) => card.toString() !== cardId);
     await list.save();
@@ -76,9 +82,19 @@ export class CardService {
     cardId: string,
     position: number,
   ): Promise<List> {
+    position = Math.floor(position) - 1
     const list = await this.listModel.findById(listId);
     if (!list) {
       throw new NotFoundException('List not found');
+    }
+    if(!list.cards) {
+      throw new NotFoundException('Card not found');
+    }
+    if(position < 0) {
+      position = 0;
+    }
+    if(position > list.cards.length) {
+      position = list.cards.length;
     }
     list.cards = list.cards.filter((card) => card.toString() !== cardId);
     list.cards.splice(position, 0, new Types.ObjectId(cardId));

@@ -1,5 +1,6 @@
 import {
   Body,
+  ConflictException,
   Controller,
   Delete,
   Get,
@@ -28,10 +29,10 @@ export class CardController {
   GetCard(@Param('cardId') cardId: string) {
     return this.cardService.GetCard(cardId);
   }
-  @Post('')
+  @Post('/:listId')
   @UseGuards(AuthGuard())
   @UsePipes(ValidationPipe)
-  CreateCard(@Param('listId') listId: string, @Body() card: CardUpdateDto) {
+  CreateCard(@Param('listId') listId: string, @Body() card: CardDto) {
     return this.cardService.CreateCard(card, listId);
   }
   @Post('/:cardId/:listId')
@@ -41,11 +42,14 @@ export class CardController {
     @Param('listId') listId: string,
     @Body('position') position: number,
   ) {
+    if(!position) {
+      throw new ConflictException('position is required');
+    }
     return this.cardService.ReOrderCard(listId, cardId, position);
   }
   @Put('/:cardId')
   @UseGuards(AuthGuard())
-  UpdateCard(@Param('cardId') cardId: string, @Body() card: CardDto) {
+  UpdateCard(@Param('cardId') cardId: string, @Body() card: CardUpdateDto) {
     return this.cardService.UpdateCard(cardId, card);
   }
   @Delete('/:cardId')

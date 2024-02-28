@@ -84,7 +84,7 @@ export class ListService {
     listId: string,
     position: number,
   ): Promise<any> {
-    position = position - 1;
+    position = Math.floor(position) - 1;
     const board = await this.boardModel.findById(boardId);
     if (!board) {
       throw new NotFoundException('Board not found');
