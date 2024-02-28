@@ -1,11 +1,10 @@
-import {IsIn, IsNotEmpty, Length } from "class-validator";
-import { userRole } from "./auth.types";
+import { IsNotEmpty, Length } from 'class-validator';
 
 export class authDto {
-    @IsNotEmpty()
-    username: string;
+  @IsNotEmpty()
+  username: string;
 
-    @IsNotEmpty()
-    @Length(4)
-    password: string;
+  @IsNotEmpty()
+  @Length(4)
+  password: string;
 }

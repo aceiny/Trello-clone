@@ -7,8 +7,12 @@ import { ListModule } from './list/list.module';
 import { CardModule } from './card/card.module';
 @Module({
   imports: [
-     MongooseModule.forRoot(process.env.MONGO_URI) , 
-     AuthModule, JwtModule, BoardModule, ListModule, CardModule
-    ],
+    MongooseModule.forRoot(process.env.MONGO_URI),
+    AuthModule,
+    JwtModule,
+    BoardModule,
+    ListModule,
+    CardModule,
+  ],
 })
 export class AppModule {}

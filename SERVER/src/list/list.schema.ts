@@ -1,11 +1,7 @@
 import { Prop, Schema, SchemaFactory, raw } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
 
-const card = raw({
-
-})
-
-@Schema({ timestamps: true})
+@Schema({ timestamps: true })
 export class List extends Document {
   @Prop()
   name: string;

@@ -31,8 +31,10 @@ export class ListService {
     await board.save();
     return listObj;
   }
-  async GetAllLists(boardId: string , user : JwtDto): Promise<any[]> {
-    const board = await this.boardModel.findById(boardId , user.id).populate('lists');
+  async GetAllLists(boardId: string, user: JwtDto): Promise<any[]> {
+    const board = await this.boardModel
+      .findById(boardId, user.id)
+      .populate('lists');
     if (!board) {
       throw new NotFoundException('Board not found');
     }
@@ -87,11 +89,11 @@ export class ListService {
     if (!board) {
       throw new NotFoundException('Board not found');
     }
-    if(position < 0){
-        position = 0
+    if (position < 0) {
+      position = 0;
     }
-    if(position > board.lists.length){
-        position = board.lists.length - 1
+    if (position > board.lists.length) {
+      position = board.lists.length - 1;
     }
     board.lists = board.lists.filter(
       (list) => list.toString() != listId.toString(),
@@ -100,5 +102,4 @@ export class ListService {
     await board.save();
     return board;
   }
-
 }

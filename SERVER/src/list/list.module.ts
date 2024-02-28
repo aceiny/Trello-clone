@@ -4,7 +4,7 @@ import { ListService } from './list.service';
 import { BoardModule } from 'src/board/board.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { List, ListSchema } from './list.schema';
-import { JwtModule } from '../jwt/jwt.module'
+import { JwtModule } from '../jwt/jwt.module';
 @Module({
   imports: [
     JwtModule,
@@ -13,8 +13,8 @@ import { JwtModule } from '../jwt/jwt.module'
   ],
   controllers: [ListController],
   providers: [ListService],
-  exports : [
+  exports: [
     MongooseModule.forFeature([{ name: List.name, schema: ListSchema }]),
-  ]
+  ],
 })
 export class ListModule {}

@@ -9,25 +9,17 @@ import { RolesGuard } from './role.guard';
 @Module({
   imports: [
     PassportModule.register({
-      defaultStrategy : 'jwt'
+      defaultStrategy: 'jwt',
     }),
     jwtModule.register({
-      secret : process.env.JWT_SECRET,
-      signOptions : { 
-        expiresIn : '30d' 
-      }
+      secret: process.env.JWT_SECRET,
+      signOptions: {
+        expiresIn: '30d',
+      },
     }),
   ],
   controllers: [JwtController],
-  providers: [
-    JwtService,
-    JwtStrategy,
-    RolesGuard, 
-  ],
-  exports : [
-    JwtStrategy,
-    PassportModule,
-    jwtModule
-  ]
+  providers: [JwtService, JwtStrategy, RolesGuard],
+  exports: [JwtStrategy, PassportModule, jwtModule],
 })
 export class JwtModule {}
