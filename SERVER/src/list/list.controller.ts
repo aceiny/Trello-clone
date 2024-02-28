@@ -44,4 +44,5 @@ export class ListController {
     DeleteList(@Param('id') listId : string , @Param('boardId') boardId : string){
         return this.listService.DeleteList(listId)
     }
+
 }

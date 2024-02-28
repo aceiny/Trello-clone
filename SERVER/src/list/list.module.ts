@@ -13,5 +13,8 @@ import { JwtModule } from '../jwt/jwt.module'
   ],
   controllers: [ListController],
   providers: [ListService],
+  exports : [
+    MongooseModule.forFeature([{ name: List.name, schema: ListSchema }]),
+  ]
 })
 export class ListModule {}
