@@ -93,6 +93,7 @@ To run this project, you will need to add the following environment variables to
 ## API Reference
 <details> 
 <summary>Click to expand project features</summary>
+
 #### Signup new user
 ```http
 POST /auth/signup
