@@ -1,9 +1,9 @@
-import { IsNotEmpty, IsString } from "class-validator";
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class ListDto {
-    @IsString()
-    @IsNotEmpty()
-    name: string;
-    
-    description: string;
+  @IsString()
+  @IsNotEmpty()
+  name: string;
+
+  description: string;
 }
