@@ -1,4 +1,8 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, ObjectId, Types } from 'mongoose';
 import { Card } from './card.schema';
@@ -37,44 +41,48 @@ export class CardService {
       return [];
     }
     return list.cards;
-  
   }
-  async GetCard(cardId : string): Promise<Card> {
-    const card = await this.cardModel.findById(cardId)
-    if(!card){
-      throw new NotFoundException('Card not found')
+  async GetCard(cardId: string): Promise<Card> {
+    const card = await this.cardModel.findById(cardId);
+    if (!card) {
+      throw new NotFoundException('Card not found');
     }
-    return card
+    return card;
   }
   async UpdateCard(cardId: string, card: any): Promise<Card> {
-    const updatedCard = await this.cardModel.findByIdAndUpdate
-    (cardId, card, {new: true})
-    if(!updatedCard){
-      throw new NotFoundException('Card not found')
+    const updatedCard = await this.cardModel.findByIdAndUpdate(cardId, card, {
+      new: true,
+    });
+    if (!updatedCard) {
+      throw new NotFoundException('Card not found');
     }
-    return updatedCard
+    return updatedCard;
   }
   async DeleteCard(cardId: string): Promise<List> {
-    const deletedCard = await this.cardModel.findByIdAndDelete(cardId)
-    if(!deletedCard){
-      throw new NotFoundException('Card not found')
+    const deletedCard = await this.cardModel.findByIdAndDelete(cardId);
+    if (!deletedCard) {
+      throw new NotFoundException('Card not found');
     }
-    const list = await this.listModel.findOne({cards: cardId})
-    if(!list){
-      throw new NotFoundException('List not found')
+    const list = await this.listModel.findOne({ cards: cardId });
+    if (!list) {
+      throw new NotFoundException('List not found');
     }
-    list.cards = list.cards.filter((card) => card.toString() !== cardId)
-    await list.save()
-    return list
+    list.cards = list.cards.filter((card) => card.toString() !== cardId);
+    await list.save();
+    return list;
   }
-  async ReOrderCard(listId: string, cardId: string , position : number): Promise<List> {
-    const list = await this.listModel.findById(listId)
-    if(!list){
-      throw new NotFoundException('List not found')
+  async ReOrderCard(
+    listId: string,
+    cardId: string,
+    position: number,
+  ): Promise<List> {
+    const list = await this.listModel.findById(listId);
+    if (!list) {
+      throw new NotFoundException('List not found');
     }
-    list.cards = list.cards.filter((card) => card.toString() !== cardId)
-    list.cards.splice(position, 0, new Types.ObjectId(cardId))
-    await list.save()
-    return list
+    list.cards = list.cards.filter((card) => card.toString() !== cardId);
+    list.cards.splice(position, 0, new Types.ObjectId(cardId));
+    await list.save();
+    return list;
   }
 }
