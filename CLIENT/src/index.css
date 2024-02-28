@@ -15,3 +15,6 @@
 .HomeSideBarNav{
   @apply cursor-pointer px-3 py-2 hover:bg-[#333c4381] rounded-md transition-all w-full font-[600]
 }
+.ListCard { 
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 1px, rgba(3, 4, 4, 0.5) 0px 1px 1px 0px, rgba(3, 4, 4, 0.5) 0px 0px 1px 0px;
+}
