@@ -2,7 +2,7 @@ import React from "react";
 import searchIcon from "../assets/icons/search.svg";
 const NavBar = () => {
   return (
-    <nav className=" py-3 px-4 h-fit bg-[#1D2125] text-[#b6c2cf] border-b border-[#b6c2cf5c] flex justify-between items-center">
+    <nav className=" py-2 px-4 h-fit bg-[#1D2125] text-[#b6c2cf] border-b border-[#b6c2cf5c] flex justify-between items-center">
       <article className="flex items-center justify-center gap-8">
         <img src="" alt="logo" className="w-20 h-10" />
         <ul className="flex items-center justify-center gap-8">
