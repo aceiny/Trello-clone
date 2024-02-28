@@ -89,3 +89,173 @@ To run this project, you will need to add the following environment variables to
 
 **Performance Optimization**: Optimize the application for performance, especially for operations involving large numbers of boards, lists, or cards.
 </details>
+
+## API Reference
+<details> 
+<summary>Click to expand project features</summary>
+
+#### Signup new user
+```http
+POST /auth/signup
+```
+| Parameter | Type     |
+| :-------- | :------- |
+| `Username` | `string` |
+| `Passsword` | `string` |
+
+#### Login user
+```http
+GET /auth/login
+```
+| Parameter | Type     |
+| :-------- | :------- |
+| `Username` | `string` |
+| `Passsword` | `string` |
+
+#### Get all user boards
+```http
+GET /board  'require auth'
+```
+| Parameter | Type     |
+| :-------- | :------- |
+| `` | `` |
+
+#### Get Board by ID
+```http
+GET /board/:id  'require auth'
+```
+| Parameter | Type     |
+| :-------- | :------- |
+| `id` | `string` |
+
+#### Create Board
+```http
+POST /board  'require auth'
+```
+| Parameter | Type     |
+| :-------- | :------- |
+| `board` | `BoardDto` |
+
+#### Update Board
+```http
+PUT /board/:id  'require auth'
+```
+| Parameter | Type     |
+| :-------- | :------- |
+| `id` | `string` |
+| `board` | `Board` |
+
+#### Delete Board
+```http
+DELETE /board/:id  'require auth'
+```
+| Parameter | Type     |
+| :-------- | :------- |
+| `id` | `string` |
+
+#### Get All Lists by Board ID
+```http
+GET /list/all/:boardId  'require auth'
+```
+| Parameter | Type     |
+| :-------- | :------- |
+| `boardId` | `string` |
+
+#### Get List by ID
+```http
+GET /list/:id  'require auth'
+```
+| Parameter | Type     |
+| :-------- | :------- |
+| `Id` | `string` |
+
+#### Create List
+```http
+POST /list/:boardId  'require auth'
+```
+| Parameter | Type     |
+| :-------- | :------- |
+| `boardId` | `string` |
+| `list` | `ListDto` |
+
+#### Reorder List
+```http
+POST /list/:listId/:boardId  'require auth'
+```
+| Parameter | Type     |
+| :-------- | :------- |
+| `listId` | `string` |
+| `boardId` | `string` |
+| `position` | `number` |
+
+#### Update List
+```http
+PUT /list/:id  'require auth'
+```
+| Parameter | Type     |
+| :-------- | :------- |
+| `id` | `string` |
+| `list` | `ListDto` |
+
+#### Delete List
+```http
+DELETE /list/:id  'require auth'
+```
+| Parameter | Type     |
+| :-------- | :------- |
+| `id` | `string` |
+
+#### Get Cards by List ID
+```http
+GET /card/all/:listId  'require auth'
+```
+
+| Parameter | Type     |
+| :-------- | :------- |
+| `listId	` | `string` |
+
+#### Get Card by ID
+```http
+GET /card/all/:listId  'require auth'
+```
+| Parameter | Type     |
+| :-------- | :------- |
+| `cardId` | `string` |
+
+#### Create Card
+```http
+GET /card/all/:listId  'require auth'
+```
+| Parameter | Type     |
+| :-------- | :------- |
+| `listId` | `string` |
+| `card` | `CardDto` |
+
+
+#### Reorder Card
+```http
+POST /card/:cardId/:listId  'require auth'
+```
+| Parameter | Type     |
+| :-------- | :------- |
+| `cardId` | `string` |
+| `listId` | `string` |
+| `position` | `number` |
+
+#### Update Card
+```http
+PUT /card/:cardId  'require auth'
+```
+| Parameter | Type     |
+| :-------- | :------- |
+| `cardId` | `string` |
+| `card` | `CardUpdateDto` |
+
+#### Delete Card
+```http
+DELETE /card/:cardId  'require auth'
+```
+| Parameter | Type     |
+| :-------- | :------- |
+| `cardId` | `string` |
+</details>
