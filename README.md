@@ -92,7 +92,7 @@ To run this project, you will need to add the following environment variables to
 
 ## API Reference
 <details> 
-<summary>Click to expand project api references</summary>
+<summary>Click to expand project features</summary>
 
 #### Signup new user
 ```http
@@ -122,7 +122,7 @@ GET /board  'require auth'
 
 #### Get Board by ID
 ```http
-  GET /board/:id  'require auth'
+GET /board/:id  'require auth'
 ```
 | Parameter | Type     |
 | :-------- | :------- |
