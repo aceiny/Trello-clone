@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.HomeSideBarNav{
+  @apply cursor-pointer px-3 py-2 hover:bg-[#333c4381] rounded-md transition-all w-full font-[600]
+}
