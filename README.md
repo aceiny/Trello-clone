@@ -89,6 +89,7 @@ To run this project, you will need to add the following environment variables to
 
 **Performance Optimization**: Optimize the application for performance, especially for operations involving large numbers of boards, lists, or cards.
 </details>
+
 ## API Reference
 <details> 
 <summary>Click to expand project features</summary>
