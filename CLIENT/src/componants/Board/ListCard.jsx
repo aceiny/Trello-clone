@@ -18,11 +18,11 @@ const ListCard = ({ list }) => {
     },
   ]);
   const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: list._id });
-  const ListStyle = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-  };
+    useSortable({ id: String(list._id) });
+    const ListStyle = {
+      transform: CSS.Transform.toString(transform) || '',
+      transition,
+    };
   return (
     <div
       ref={setNodeRef}
@@ -38,10 +38,11 @@ const ListCard = ({ list }) => {
         {list.cards &&
           list.cards.map((card) => <CardCard key={card.id} card={card} />)}
       </article>
-        <input
-          type="text"
-          className="border-white outline-none w-full rounded bg-transparent py-2 px-2  border top-[110%] origin-top left-0"
-        />
+      <input
+        type="text"
+        onMouseDown={(event) => event.stopPropagation()}
+        className=" text-white bg-transparent border border-white py-2 w-full"
+      />
     </div>
   );
 };

@@ -17,29 +17,29 @@ const BoardPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
       dispatch(getBoard(id));
+
   }, [id]);
   
   const DragEndHandler = (e) => {
-    const { active, over } = e;
+    console.log("drag end" , e.active.id , e.over.id)
+    /*const { active, over } = e;
     if (active.id !== over.id) {
       setLists((lists) => {
         const oldIndex = lists.findIndex((list) => list.id === active.id);
         const newIndex = lists.findIndex((list) => list.id === over.id);
         const newList = arrayMove(lists, oldIndex, newIndex);
         return newList;
-      });
-    }
+      });*/
   };
   return (
     <DndContext
       collisionDetection={closestCenter}
       onDragEnd={DragEndHandler}
-      className="flex"
     >
       <div className="flex flex-1 items-start py-3 px-3 gap-8 bg-red-200">
         <div className="flex items-start flex-wrap gap-3">
           <SortableContext
-            items={board ? board.lists : []}
+            items={board ? board.lists.map(list => String(list._id)) : []}
             strategy={horizontalListSortingStrategy}
           >
             {
@@ -53,6 +53,6 @@ const BoardPage = () => {
       </div>
     </DndContext>
   );
-};
+            }
 
 export default BoardPage;
