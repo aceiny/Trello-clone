@@ -3,22 +3,22 @@ import CardCard from "./CardCard";
 import { CSS } from "@dnd-kit/utilities";
 import { useSortable } from "@dnd-kit/sortable";
 const ListCard = ({ list }) => {
-  const [card , setCard ] = useState([
+  const [card, setCard] = useState([
     {
-      id:1,
-      name : "kill yasseur"
+      id: 1,
+      name: "kill yasseur",
     },
     {
-      id:2,
-      name : "kill tamer"
+      id: 2,
+      name: "kill tamer",
     },
     {
-      id:3,
-      name : "kill brg"
-    }
-  ])
+      id: 3,
+      name: "kill brg",
+    },
+  ]);
   const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: list._id});
+    useSortable({ id: list._id });
   const ListStyle = {
     transform: CSS.Transform.toString(transform),
     transition,
@@ -35,11 +35,13 @@ const ListCard = ({ list }) => {
         <h1 className="text-[15px] font-[600]">{list.name}</h1>
       </div>
       <article className="flex flex-col gap-2">
-        {
-          list.cards && list.cards.map((card) => <CardCard key={card.id} card={card} />)
-        }
+        {list.cards &&
+          list.cards.map((card) => <CardCard key={card.id} card={card} />)}
       </article>
-      <button className="text-start font-[600] px-1 pt-3 ">Add a card</button>
+        <input
+          type="text"
+          className="border-white outline-none w-full rounded bg-transparent py-2 px-2  border top-[110%] origin-top left-0"
+        />
     </div>
   );
 };
