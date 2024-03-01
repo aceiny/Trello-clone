@@ -15,7 +15,7 @@ export const getBoards = createAsyncThunk("board/getBoards", async (data) => {
     return err.response;
   }
 });
-export const getBoard = createAsyncThunk("board/getLists", async (id) => {
+export const getBoard = createAsyncThunk("board/getBoard", async (id) => {
   try {
     const res = await axios.get(api + `board/${id}/`, {
       headers: {
@@ -27,7 +27,43 @@ export const getBoard = createAsyncThunk("board/getLists", async (id) => {
     return err.response;
   }
 });
-
+export const addList = createAsyncThunk("board/addList", async (data) => {
+  try {
+    const res = await axios.post(
+      api + `list/${data.id}`,
+      {
+        name: data.name,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    return res;
+  } catch (err) {
+    return err.response;
+  }
+});
+export const addCard = createAsyncThunk("board/addCard", async (data) => {
+    try {
+        const res = await axios.post(
+        api + `card/${data.id}`,
+        {
+            name: data.name,
+        },
+        {
+            headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        }
+        );
+        return res;
+    } catch (err) {
+        return err.response;
+    }
+}
+);
 const initialState = {
   boards: null,
   pendingBoards: false,
@@ -61,6 +97,19 @@ const boardSlice = createSlice({
         state.pendingBoard = false;
         if (action.payload.status === 200) {
           state.board = action.payload.data;
+        }
+      })
+      .addCase(getBoard.rejected, (state) => {
+        state.pendingBoard = false;
+        toastFNC("Board Fetch Failed", "error");
+      })
+      .addCase(addList.pending, (state) => {
+        state.pendingBoard = true;
+      })
+      .addCase(addList.fulfilled, (state, action) => {
+        state.pendingBoard = false;
+        if (action.payload.status === 201) {
+            state.board.lists.push(action.payload.data);  
         }
       });
   },

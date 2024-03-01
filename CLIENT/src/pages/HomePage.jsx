@@ -10,9 +10,6 @@ const HomePage = () => {
     if(!boards) {
       dispatch(getBoards());
     }
-    return () => {
-      console.log("cleanup");
-    }
   },[boards])
   return (
     <div className="bg-[#1D2125] flex-1 pt-[40px] flex items-start justify-center">
