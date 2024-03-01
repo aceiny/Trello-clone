@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CardCard from "./CardCard";
 import { CSS } from "@dnd-kit/utilities";
 import { useSortable } from "@dnd-kit/sortable";
-const ListCard = ({ name, id }) => {
+const ListCard = ({ list }) => {
   const [card , setCard ] = useState([
     {
       id:1,
@@ -18,7 +18,7 @@ const ListCard = ({ name, id }) => {
     }
   ])
   const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id });
+    useSortable({ id: list._id});
   const ListStyle = {
     transform: CSS.Transform.toString(transform),
     transition,
@@ -32,13 +32,12 @@ const ListCard = ({ name, id }) => {
       className="bg-[#101204] text-[14px] pt-2 pb-4 px-[10px] text-[#b6c2cf] w-[302px] min-h-[98px] max-h-[400px] overflow-auto flex flex-col gap-2  rounded-[12px] ListCard "
     >
       <div className="px-3 py-2">
-        <h1 className="text-[15px] font-[600]">{name}</h1>
+        <h1 className="text-[15px] font-[600]">{list.name}</h1>
       </div>
       <article className="flex flex-col gap-2">
-        <CardCard />
-        <CardCard />
-        <CardCard />
-        <CardCard />
+        {
+          list.cards && list.cards.map((card) => <CardCard key={card.id} card={card} />)
+        }
       </article>
       <button className="text-start font-[600] px-1 pt-3 ">Add a card</button>
     </div>
