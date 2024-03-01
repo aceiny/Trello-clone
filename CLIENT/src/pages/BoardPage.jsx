@@ -16,13 +16,11 @@ const BoardPage = () => {
   const board = useSelector((state) => state.Board.board);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (!board) {
       dispatch(getBoard(id));
-    }
     return () => {
       console.log("cleanup");
     };
-  }, [board]);
+  }, [id, board]);
   const [toggleAdd, setToggleAdd] = useState(false);
   const DragEndHandler = (e) => {
     const { active, over } = e;
@@ -41,7 +39,7 @@ const BoardPage = () => {
       onDragEnd={DragEndHandler}
       className="flex"
     >
-      <div className="flex items-start py-3 px-3 gap-8 bg-red-200">
+      <div className="flex flex-1 items-start py-3 px-3 gap-8 bg-red-200">
         <div className="flex items-start flex-wrap gap-3">
           <SortableContext
             items={board ? board.lists : []}
