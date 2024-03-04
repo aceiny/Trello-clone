@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { api } from "../../config";
 import { toastFNC } from "../../config/toast";
+import { arrayMove } from "@dnd-kit/sortable";
 
 export const getBoards = createAsyncThunk("board/getBoards", async (data) => {
   try {
@@ -45,6 +46,24 @@ export const addList = createAsyncThunk("board/addList", async (data) => {
     return err.response;
   }
 });
+export const ReOrderPosition = createAsyncThunk("board/ReOrderPosition", async (data) => {
+    try {
+        const res = await axios.post(
+        api + `list/${data.list_id}/${data.board_id}`,
+        {
+            position: data.position + 1,
+        },
+        {
+            headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        }
+        );
+        return res;
+    } catch (err) {
+        return err.response;
+    }
+});
 export const addCard = createAsyncThunk("board/addCard", async (data) => {
     try {
         const res = await axios.post(
@@ -74,7 +93,12 @@ const initialState = {
 const boardSlice = createSlice({
   name: "board",
   initialState,
-  reducers: {},
+  reducers: {
+    reorderList: (state, action) => {
+      const { oldIndex, newIndex } = action.payload;
+      state.board.lists = arrayMove(state.board.lists, oldIndex, newIndex);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getBoards.pending, (state) => {
@@ -111,8 +135,18 @@ const boardSlice = createSlice({
         if (action.payload.status === 201) {
             state.board.lists.push(action.payload.data);  
         }
-      });
+      })
+      .addCase(ReOrderPosition.pending , (state,action) => {
+
+      })
+      .addCase(ReOrderPosition.fulfilled, (state, action) => {
+        if(action.payload.status != 201){
+          toastFNC("Reorder Failed", "error");
+          return 
+        }
+      })
   },
 });
 
 export default boardSlice.reducer;
+export const { reorderList } = boardSlice.actions;

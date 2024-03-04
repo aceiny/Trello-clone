@@ -3,20 +3,6 @@ import CardCard from "./CardCard";
 import { CSS } from "@dnd-kit/utilities";
 import { useSortable } from "@dnd-kit/sortable";
 const ListCard = ({ list }) => {
-  const [card, setCard] = useState([
-    {
-      id: 1,
-      name: "kill yasseur",
-    },
-    {
-      id: 2,
-      name: "kill tamer",
-    },
-    {
-      id: 3,
-      name: "kill brg",
-    },
-  ]);
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: String(list._id) });
     const ListStyle = {
@@ -41,6 +27,7 @@ const ListCard = ({ list }) => {
       <input
         type="text"
         onMouseDown={(event) => event.stopPropagation()}
+        onClick={(event) => event.stopPropagation()}
         className=" text-white bg-transparent border border-white py-2 w-full"
       />
     </div>

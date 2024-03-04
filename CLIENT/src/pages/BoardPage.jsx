@@ -7,7 +7,7 @@ import {
   horizontalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { useDispatch, useSelector } from "react-redux";
-import { getBoard } from "../store/reducers/board.reducer";
+import { ReOrderPosition, getBoard, reorderList } from "../store/reducers/board.reducer";
 import { useParams } from "react-router-dom";
 import AddList from "../componants/Board/AddList";
 
@@ -21,15 +21,18 @@ const BoardPage = () => {
   }, [id]);
   
   const DragEndHandler = (e) => {
-    console.log("drag end" , e.active.id , e.over.id)
-    /*const { active, over } = e;
+    const { active, over } = e;
     if (active.id !== over.id) {
-      setLists((lists) => {
-        const oldIndex = lists.findIndex((list) => list.id === active.id);
-        const newIndex = lists.findIndex((list) => list.id === over.id);
-        const newList = arrayMove(lists, oldIndex, newIndex);
-        return newList;
-      });*/
+        const oldIndex = board.lists.findIndex((list) => list._id === active.id);
+        const newIndex = board.lists.findIndex((list) => list._id === over.id);
+        const data = {
+          list_id : active.id,
+          board_id : board._id,
+          position : newIndex,
+        }
+        dispatch(ReOrderPosition(data));
+        dispatch(reorderList({ oldIndex, newIndex }));
+      };
   };
   return (
     <DndContext
