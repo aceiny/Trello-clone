@@ -1,33 +1,33 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { api } from "../../config";
-import { toastFNC } from "../../config/toast";
-import { arrayMove } from "@dnd-kit/sortable";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { api } from '../../config';
+import { toastFNC } from '../../config/toast';
+import { arrayMove } from '@dnd-kit/sortable';
 
-export const addBoard = createAsyncThunk("board/addBoard", async (data) => {
+export const addBoard = createAsyncThunk('board/addBoard', async (data) => {
   try {
     const res = await axios.post(
-      api + "board",
+      api + 'board',
       {
         name: data,
-        description: "",
+        description: '',
       },
       {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
-      }
+      },
     );
     return res;
   } catch (err) {
     return err.response;
   }
 });
-export const getBoards = createAsyncThunk("board/getBoards", async (data) => {
+export const getBoards = createAsyncThunk('board/getBoards', async (data) => {
   try {
-    const res = await axios.get(api + "board", {
+    const res = await axios.get(api + 'board', {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     });
     return res;
@@ -35,11 +35,11 @@ export const getBoards = createAsyncThunk("board/getBoards", async (data) => {
     return err.response;
   }
 });
-export const getBoard = createAsyncThunk("board/getBoard", async (id) => {
+export const getBoard = createAsyncThunk('board/getBoard', async (id) => {
   try {
     const res = await axios.get(api + `board/${id}/`, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     });
     return res;
@@ -47,7 +47,7 @@ export const getBoard = createAsyncThunk("board/getBoard", async (id) => {
     return err.response;
   }
 });
-export const addList = createAsyncThunk("board/addList", async (data) => {
+export const addList = createAsyncThunk('board/addList', async (data) => {
   try {
     const res = await axios.post(
       api + `list/${data.id}`,
@@ -56,62 +56,64 @@ export const addList = createAsyncThunk("board/addList", async (data) => {
       },
       {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
-      }
+      },
     );
     return res;
   } catch (err) {
     return err.response;
   }
 });
-export const ReOrderPosition = createAsyncThunk("board/ReOrderPosition", async (data) => {
+export const ReOrderPosition = createAsyncThunk(
+  'board/ReOrderPosition',
+  async (data) => {
     try {
-        const res = await axios.post(
+      const res = await axios.post(
         api + `list/${data.list_id}/${data.board_id}`,
         {
-            position: data.position + 1,
+          position: data.position + 1,
         },
         {
-            headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-        }
-        );
-        return res;
-    } catch (err) {
-        return err.response;
-    }
-});
-export const addCard = createAsyncThunk("board/addCard", async (data) => {
-    try {
-        const res = await axios.post(
-        api + `card/${data.id}`,
-        {
-            name: data.name,
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
         },
-        {
-            headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-        }
-        );
-        return res;
+      );
+      return res;
     } catch (err) {
-        return err.response;
+      return err.response;
     }
-}
+  },
 );
+export const addCard = createAsyncThunk('board/addCard', async (data) => {
+  try {
+    const res = await axios.post(
+      api + `card/${data.id}`,
+      {
+        name: data.name,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      },
+    );
+    return res;
+  } catch (err) {
+    return err.response;
+  }
+});
 const initialState = {
   boards: null,
   pendingBoards: false,
   board: null,
   pendingBoard: false,
-  pendingAddBoard : false,
+  pendingAddBoard: false,
 };
 
 const boardSlice = createSlice({
-  name: "board",
+  name: 'board',
   initialState,
   reducers: {
     reorderList: (state, action) => {
@@ -132,7 +134,7 @@ const boardSlice = createSlice({
       })
       .addCase(getBoards.rejected, (state) => {
         state.pendingBoards = false;
-        toastFNC("Boards Fetch Failed", "error");
+        toastFNC('Boards Fetch Failed', 'error');
       })
       .addCase(getBoard.pending, (state) => {
         state.pendingBoard = true;
@@ -145,7 +147,7 @@ const boardSlice = createSlice({
       })
       .addCase(getBoard.rejected, (state) => {
         state.pendingBoard = false;
-        toastFNC("Board Fetch Failed", "error");
+        toastFNC('Board Fetch Failed', 'error');
       })
       .addCase(addList.pending, (state) => {
         state.pendingBoard = true;
@@ -153,34 +155,29 @@ const boardSlice = createSlice({
       .addCase(addList.fulfilled, (state, action) => {
         state.pendingBoard = false;
         if (action.payload.status === 201) {
-            state.board.lists.push(action.payload.data);  
+          state.board.lists.push(action.payload.data);
         }
       })
-      .addCase(ReOrderPosition.pending , (state,action) => {
-
-      })
+      .addCase(ReOrderPosition.pending, (state, action) => {})
       .addCase(ReOrderPosition.fulfilled, (state, action) => {
-        if(action.payload.status != 201){
-          toastFNC("Reorder Failed", "error");
-          return 
+        if (action.payload.status != 201) {
+          toastFNC('Reorder Failed', 'error');
+          return;
         }
       })
       .addCase(addBoard.pending, (state) => {
         state.pendingAddBoard = true;
-      }
-      )
+      })
       .addCase(addBoard.fulfilled, (state, action) => {
         state.pendingAddBoard = false;
-        console.log(action.payload)
+        console.log(action.payload);
         if (action.payload.status === 201) {
           state.boards.push(action.payload.data);
-          toastFNC("Board Created", "success");
+          toastFNC('Board Created', 'success');
+        } else {
+          toastFNC('Board Creation Failed', 'error');
         }
-        else {
-          toastFNC("Board Creation Failed", "error");
-        }
-      })
-
+      });
   },
 });
 
