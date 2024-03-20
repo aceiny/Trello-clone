@@ -312,3 +312,6 @@ DELETE /card/:cardId  'require auth'
 | `cardId`  | `string` |
 
 </details>
+## Api to use ```
+https://axeiny.tech:4000/
+```
