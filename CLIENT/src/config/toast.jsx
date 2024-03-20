@@ -1,4 +1,3 @@
-import { Bounce } from "react-reveal";
 import { toast } from "react-toastify";
 export const toastFNC = (message, type) => {
     if(type === "success"){
