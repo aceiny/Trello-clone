@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import ListCard from '../componants/Board/ListCard';
-import { DndContext, closestCenter, closestCorners } from '@dnd-kit/core';
-import {
-  SortableContext,
-  arrayMove,
-  horizontalListSortingStrategy,
-} from '@dnd-kit/sortable';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   ReOrderPosition,
