@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const BoardCard = ({ board , bg }) => {
+const BoardCard = ({ board, bg }) => {
   const CardStyle = {
-    background: 'linear-gradient(145deg, ' + bg()+ ', ' + bg() + ')',
+    background: 'linear-gradient(145deg, ' + bg() + ', ' + bg() + ')',
   };
   return (
     <Link to={`board/${board._id}`}>

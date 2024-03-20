@@ -47,15 +47,15 @@ const BoardPage = () => {
     );
   }
   return (
-      <div className="flex flex-1 items-start py-3 px-3 gap-8 bg-red-200">
-        <div className="flex items-start flex-wrap gap-3">
-            {board &&
-              board.lists.map((list, index) => (
-                <ListCard key={index} list={list} />
-              ))}
-        </div>
-        <AddList id={board ? board._id : null} />
+    <div className="flex flex-1 items-start py-3 px-3 gap-8 bg-red-200">
+      <div className="flex items-start flex-wrap gap-3">
+        {board &&
+          board.lists.map((list, index) => (
+            <ListCard key={index} list={list} />
+          ))}
       </div>
+      <AddList id={board ? board._id : null} />
+    </div>
   );
 };
 
