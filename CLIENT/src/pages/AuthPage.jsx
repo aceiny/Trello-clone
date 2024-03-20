@@ -1,32 +1,24 @@
-import React from 'react';
-import { Login } from '../store/reducers/auth.reducer';
-import { useDispatch } from 'react-redux';
+import Login from '../componants/Auth/login';
+import React, { useState } from 'react';
+import Signup from '../componants/Auth/signup';
+
 const AuthPage = () => {
-  const dispatch = useDispatch();
-  const LoginUser = (e) => {
-    e.preventDefault();
-    const username = e.target.username.value;
-    const password = e.target.password.value;
-    dispatch(Login({ username, password }));
-    console.log(username, password);
-  };
+  const [view , setView] = useState(false)
   return (
-    <div>
-      <form action="" onSubmit={LoginUser}>
-        <input
-          type="text"
-          name="username"
-          placeholder="username"
-          className="border-black"
-        />
-        <input
-          type="text"
-          name="password"
-          placeholder="password"
-          className="border-black"
-        />
-        <button type="submit">submit</button>
-      </form>
+    <div className="flex-1 flex items-center justify-center">
+      <div className=" flex flex-col items-center gap-5 rounded md  shadow-xl border p-5 border-black">
+        <div className="flex items-center gap-6">
+          <button onClick={()=> setView(false)} className=" bg-blue-500 px-4 py-2 rounded-xl cursor-pointer text-white font-[700] ">
+            Login
+          </button>
+          <button onClick={()=> setView(true)} className=" bg-cyan-300 px-4 py-2 rounded-xl cursor-pointer text-black font-[700]">
+            Signup
+          </button>
+        </div>
+        {
+          view ? <Signup/> : <Login/> 
+        }
+      </div>
     </div>
   );
 };

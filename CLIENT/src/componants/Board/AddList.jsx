@@ -12,7 +12,7 @@ const AddList = ({ id }) => {
   };
   const createListHandler = () => {
     if (name == '') {
-      toastFNC("name can't be empty", "error");;
+      toastFNC("name can't be empty", 'error');
       setToggleAdd(false);
       return;
     }
