@@ -53,11 +53,9 @@ const NavBar = () => {
             className=" bg-transparent  py-1 px-2"
           />
         </div>
-        <p>notifiaction</p>
-        <p>help</p>
         <div>
           <img
-            src=""
+            src="https://avatars.githubusercontent.com/u/112300561?v=4"
             alt="profile"
             className="w-7 border h-7 rounded-full object-cover"
           />
