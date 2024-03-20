@@ -1,56 +1,8 @@
-import { toast } from "react-toastify";
-export const toastFNC = (message, type) => {
-    if(type === "success"){
-        return toast.success(message, {
-            position: "bottom-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-            transition: Bounce,
-            });
-        }
-    if(type === "error"){
-        return toast.error(message, {
-            position: "bottom-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-            transition: Bounce,
-            });
-        }
-    if(type === "warning"){
-        return toast.warning(message, {
-            position: "bottom-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-            transition: Bounce,
-            });
-        }
-    if(type === "info"){
-        return toast.info(message, {
-            position: "bottom-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-            transition: Bounce,
-            });
-        }
+import toast from "react-hot-toast";
 
+export const toastFNC = (message, type) => {
+    if(type === "success") toast.success(message);
+    if(type === "error") toast.error(message);
+    if(type === "loading") toast.loading(message);
+    if(type === "blank") toast(message);
 }
