@@ -148,7 +148,6 @@ const boardSlice = createSlice({
         state.pendingBoard = true;
       })
       .addCase(getBoard.fulfilled, (state, action) => {
-        console.log(action.payload)
         state.pendingBoard = false;
         if (action.payload.status === 200) {
           state.board = action.payload.data;
@@ -158,11 +157,8 @@ const boardSlice = createSlice({
         state.pendingBoard = false;
         toastFNC('Board Fetch Failed', 'error');
       })
-      .addCase(addList.pending, (state) => {
-        state.pendingBoard = true;
-      })
+      .addCase(addList.pending, (state) => {})
       .addCase(addList.fulfilled, (state, action) => {
-        state.pendingBoard = false;
         if (action.payload.status === 201) {
           state.board.lists.push(action.payload.data);
         }
@@ -179,7 +175,6 @@ const boardSlice = createSlice({
       })
       .addCase(addBoard.fulfilled, (state, action) => {
         state.pendingAddBoard = false;
-        console.log(action.payload);
         if (action.payload.status === 201) {
           state.boards.push(action.payload.data);
           toastFNC('Board Created', 'success');
@@ -192,11 +187,10 @@ const boardSlice = createSlice({
         toastFNC('Board Creation Failed', 'error');
       })
       .addCase(addCard.pending, (state) => {
-        state.pendingCard= true;
+        state.pendingCard = true;
       })
       .addCase(addCard.fulfilled, (state, action) => {
         state.pendingCard = false;
-        console.log(action.payload)
         if (action.payload.status === 201) {
           state.board.lists = state.board.lists.map((list) => {
             if (list._id === action.payload.data.list) {
@@ -205,8 +199,7 @@ const boardSlice = createSlice({
             return list;
           });
         }
-      })
-
+      });
   },
 });
 

@@ -10,9 +10,14 @@ import { useParams } from 'react-router-dom';
 import AddList from '../componants/Board/AddList';
 import { Spinner } from '@chakra-ui/react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import { getRandomColor as bg } from '../config/Colors';
 
 const BoardPage = () => {
   const pendingBoard = useSelector((state) => state.Board.pendingBoard);
+  const [bgColors , setBgColors] = useState({
+    color1 : bg(),
+    color2 : bg()
+  })
   const { id } = useParams();
   const board = useSelector((state) => state.Board.board);
   const dispatch = useDispatch();
@@ -31,6 +36,7 @@ const BoardPage = () => {
         board_id: board._id,
         position: newIndex,
       };
+      console.log(data);
       dispatch(ReOrderPosition(data));
       dispatch(reorderList({ oldIndex, newIndex }));
     }
@@ -49,7 +55,7 @@ const BoardPage = () => {
     );
   }
   return (
-    <div className="flex flex-1 items-start py-3 px-3 gap-8 bg-red-200">
+    <div style={{background : 'linear-gradient(145deg, ' + bgColors.color1 + ', ' + bgColors.color2 + ')',}} className="flex flex-1 items-start py-3 px-3 gap-8">
       <DragDropContext onDragEnd={DragEndHandler}>
         <Droppable direction="horizontal" droppableId="lists" type="group">
           {(provided) => (

@@ -16,7 +16,7 @@ const ListCard = ({ list, provided }) => {
         {list.cards &&
           list.cards.map((card) => <CardCard key={card.id} card={card} />)}
       </article>
-      <AddCard id={list._id}/>
+      <AddCard id={list._id} />
     </div>
   );
 };
