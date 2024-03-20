@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import searchIcon from "../assets/icons/search.svg";
 import { Link } from "react-router-dom";
 import { Button, Menu , MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
@@ -21,8 +21,10 @@ const NavBar = () => {
       path: "/templates",
     },
   ]
+  const [boardName , setboardName] = useState("")
+
   const createBoard = () => { 
-    console.log("create workspace") ;
+    console.log("create workspace" , boardName) ;
   }
   return (
     <nav className=" py-2 px-4 h-fit bg-[#1D2125] text-[#b6c2cf] border-b border-[#b6c2cf5c] flex justify-between items-center">
@@ -49,11 +51,13 @@ const NavBar = () => {
             <MenuItem className=" flex items-center gap-3">
               <input 
                 type="text" 
+                value={boardName}
+                onChange={(e) => setboardName(e.target.value)}
                 placeholder="workspace name" 
                 className="px-2 py-1 w-40 border-black border outline-none flex-1 text-black rounded" 
                 onClick={(e) => e.stopPropagation()} // Add this line
               />
-              <Button onClick={createBoard}>++</Button>
+              <Button onClick={createBoard}>+</Button>
             </MenuItem>
           </MenuList>
         </Menu>
