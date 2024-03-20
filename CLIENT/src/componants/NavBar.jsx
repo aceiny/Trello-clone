@@ -53,7 +53,7 @@ const NavBar = () => {
                 className="px-2 py-1 w-40 border-black border outline-none flex-1 text-black rounded" 
                 onClick={(e) => e.stopPropagation()} // Add this line
               />
-              <Button onClick={createBoard}>+</Button>
+              <Button onClick={createBoard}>++</Button>
             </MenuItem>
           </MenuList>
         </Menu>
