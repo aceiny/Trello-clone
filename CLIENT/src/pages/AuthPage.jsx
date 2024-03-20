@@ -1,6 +1,6 @@
-import React from "react";
-import { Login } from "../store/reducers/auth.reducer";
-import { useDispatch } from "react-redux";
+import React from 'react';
+import { Login } from '../store/reducers/auth.reducer';
+import { useDispatch } from 'react-redux';
 const AuthPage = () => {
   const dispatch = useDispatch();
   const LoginUser = (e) => {

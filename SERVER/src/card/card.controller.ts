@@ -42,7 +42,7 @@ export class CardController {
     @Param('listId') listId: string,
     @Body('position') position: number,
   ) {
-    if(!position) {
+    if (!position) {
       throw new ConflictException('position is required');
     }
     return this.cardService.ReOrderCard(listId, cardId, position);

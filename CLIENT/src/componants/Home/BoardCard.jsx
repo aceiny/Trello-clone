@@ -1,9 +1,9 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const BoardCard = ({ board }) => {
   const CardStyle = {
-    backgroundColor: "red",
+    backgroundColor: 'red',
   };
   return (
     <Link to={`board/${board._id}`}>

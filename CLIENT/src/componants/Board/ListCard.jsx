@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import CardCard from "./CardCard";
-import { CSS } from "@dnd-kit/utilities";
-import { useSortable } from "@dnd-kit/sortable";
+import React, { useState } from 'react';
+import CardCard from './CardCard';
+import { CSS } from '@dnd-kit/utilities';
+import { useSortable } from '@dnd-kit/sortable';
 const ListCard = ({ list }) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: String(list._id) });
-    const ListStyle = {
-      transform: CSS.Transform.toString(transform) || '',
-      transition,
-    };
+  const ListStyle = {
+    transform: CSS.Transform.toString(transform) || '',
+    transition,
+  };
   return (
     <div
       ref={setNodeRef}
