@@ -35,7 +35,6 @@ const authSlice = createSlice({
         state.pendingAuth = true;
       })
       .addCase(Login.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.pendingAuth = false;
         if (action.payload.status === 201) {
           toastFNC("Login Success", "success");
