@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import searchIcon from "../assets/icons/search.svg";
 import { Link } from "react-router-dom";
 import { Button, Menu , MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import { useDispatch } from "react-redux";
+import { addBoard } from "../store/reducers/board.reducer";
+import { toastFNC } from "../config/toast";
 const NavBar = () => {
+  const dispatch = useDispatch()
   const navs = [
     {
       title: "Workspace",
@@ -22,9 +26,9 @@ const NavBar = () => {
     },
   ]
   const [boardName , setboardName] = useState("")
-
   const createBoard = () => { 
-    console.log("create workspace" , boardName) ;
+    if (boardName === "") return toastFNC("board name is required", "error")
+    dispatch(addBoard(boardName))
   }
   return (
     <nav className=" py-2 px-4 h-fit bg-[#1D2125] text-[#b6c2cf] border-b border-[#b6c2cf5c] flex justify-between items-center">
