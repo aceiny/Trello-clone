@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addList } from '../../store/reducers/board.reducer';
+import { toastFNC } from '../../config/toast';
 
 const AddList = ({ id }) => {
   const dispatch = useDispatch();
@@ -10,14 +11,20 @@ const AddList = ({ id }) => {
     setName(e.target.value);
   };
   const createListHandler = () => {
+    if (name == '') {
+      toastFNC("name can't be empty", "error");;
+      setToggleAdd(false);
+      return;
+    }
     dispatch(addList({ id, name }));
     setToggleAdd(false);
+    setName('');
   };
   return (
     <div className="relative">
       <button
         onClick={() => setToggleAdd(!toggleAdd)}
-        className="bg-[#ffffff84] hover:bg-[#a6c5e24d] transition-all px-5 py-2 rounded-lg relative"
+        className="bg-[#ffffff84] whitespace-nowrap hover:bg-[#a6c5e24d] transition-all px-5 py-2 rounded-lg relative"
       >
         add new list
       </button>
@@ -29,6 +36,7 @@ const AddList = ({ id }) => {
         <input
           type="text"
           placeholder="name*"
+          value={name}
           onChange={nameHandler}
           className="border  border-white bg-transparent rounded px-3 py-2 outline-none"
         />
