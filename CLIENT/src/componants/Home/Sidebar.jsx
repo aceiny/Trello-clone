@@ -23,7 +23,11 @@ export default function Sidebar() {
       <article className="w-full flex flex-col gap-2">
         <p className="text-[14px] font-[400] px-3">Workspace</p>
         <div className="HomeSideBarNav items-center justify-start gap-3 flex text-start">
-          <img src="https://avatars.githubusercontent.com/u/112300561?v=4" alt="image" className="rounded-md h-8 w-8" />
+          <img
+            src="https://avatars.githubusercontent.com/u/112300561?v=4"
+            alt="image"
+            className="rounded-md h-8 w-8"
+          />
           <p>Trello Workspace</p>
         </div>
       </article>

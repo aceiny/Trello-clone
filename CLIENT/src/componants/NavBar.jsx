@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import searchIcon from '../assets/icons/search.svg';
 import { Link } from 'react-router-dom';
 import { NavCreate } from './utils/NavCreate';
+import logo from '../assets/logo.png';
 const NavBar = () => {
   const navs = [
     {
@@ -25,7 +26,9 @@ const NavBar = () => {
   return (
     <nav className=" py-2 px-4 h-fit bg-[#1D2125] text-[#b6c2cf] border-b border-[#b6c2cf5c] flex justify-between items-center">
       <article className="flex items-center justify-center gap-8">
-        <img src="" alt="logo" className="w-20 h-10" />
+        <Link to="/">
+          <img src={logo} alt="logo" className="w-[70px] object-cover" />
+        </Link>
         <ul className="flex items-center justify-center gap-8">
           {navs.map((nav, index) => (
             <Link
