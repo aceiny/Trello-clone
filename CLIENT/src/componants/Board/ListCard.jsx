@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import CardCard from './CardCard';
-import { Button } from '@chakra-ui/react';
+import AddCard from './AddCard';
 const ListCard = ({ list, provided }) => {
   return (
     <div
@@ -16,17 +16,9 @@ const ListCard = ({ list, provided }) => {
         {list.cards &&
           list.cards.map((card) => <CardCard key={card.id} card={card} />)}
       </article>
-      <div className="flex items-center gap-2">
-        <input
-          type="text"
-          className=" text-white bg-transparent flex-1 border outline-none rounded px-2  border-white py-[6px] w-full"
-        />
-        <Button className="">+</Button>
-      </div>
+      <AddCard id={list._id}/>
     </div>
   );
 };
 
 export default ListCard;
-/*        onMouseDown={(event) => event.stopPropagation()}
-        onClick={(event) => event.stopPropagation()}*/

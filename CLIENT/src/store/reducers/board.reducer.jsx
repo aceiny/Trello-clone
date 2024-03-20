@@ -109,6 +109,7 @@ const initialState = {
   board: null,
   pendingBoard: false,
   pendingAddBoard: false,
+  pendingCard: false,
 };
 
 const boardSlice = createSlice({
@@ -147,6 +148,7 @@ const boardSlice = createSlice({
         state.pendingBoard = true;
       })
       .addCase(getBoard.fulfilled, (state, action) => {
+        console.log(action.payload)
         state.pendingBoard = false;
         if (action.payload.status === 200) {
           state.board = action.payload.data;
@@ -184,7 +186,27 @@ const boardSlice = createSlice({
         } else {
           toastFNC('Board Creation Failed', 'error');
         }
-      });
+      })
+      .addCase(addBoard.rejected, (state) => {
+        state.pendingAddBoard = false;
+        toastFNC('Board Creation Failed', 'error');
+      })
+      .addCase(addCard.pending, (state) => {
+        state.pendingCard= true;
+      })
+      .addCase(addCard.fulfilled, (state, action) => {
+        state.pendingCard = false;
+        console.log(action.payload)
+        if (action.payload.status === 201) {
+          state.board.lists = state.board.lists.map((list) => {
+            if (list._id === action.payload.data.list) {
+              list.cards.push(action.payload.data);
+            }
+            return list;
+          });
+        }
+      })
+
   },
 });
 

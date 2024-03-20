@@ -37,7 +37,13 @@ export class BoardService {
         user: user.id,
         _id: boardId,
       })
-      .populate('lists');
+      .populate({
+        path: 'lists',
+        populate: {
+          path: 'cards',
+        },
+      });
+
     if (!board) {
       throw new NotFoundException('Board not found');
     }
