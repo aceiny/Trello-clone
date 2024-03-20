@@ -4,6 +4,25 @@ import { api } from "../../config";
 import { toastFNC } from "../../config/toast";
 import { arrayMove } from "@dnd-kit/sortable";
 
+export const addBoard = createAsyncThunk("board/addBoard", async (data) => {
+  try {
+    const res = await axios.post(
+      api + "board",
+      {
+        name: data,
+        description: "",
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    return res;
+  } catch (err) {
+    return err.response;
+  }
+});
 export const getBoards = createAsyncThunk("board/getBoards", async (data) => {
   try {
     const res = await axios.get(api + "board", {
@@ -88,6 +107,7 @@ const initialState = {
   pendingBoards: false,
   board: null,
   pendingBoard: false,
+  pendingAddBoard : false,
 };
 
 const boardSlice = createSlice({
@@ -145,6 +165,22 @@ const boardSlice = createSlice({
           return 
         }
       })
+      .addCase(addBoard.pending, (state) => {
+        state.pendingAddBoard = true;
+      }
+      )
+      .addCase(addBoard.fulfilled, (state, action) => {
+        state.pendingAddBoard = false;
+        console.log(action.payload)
+        if (action.payload.status === 201) {
+          state.boards.push(action.payload.data);
+          toastFNC("Board Created", "success");
+        }
+        else {
+          toastFNC("Board Creation Failed", "error");
+        }
+      })
+
   },
 });
 
