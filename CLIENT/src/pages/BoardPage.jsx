@@ -9,6 +9,7 @@ import {
 import { useParams } from 'react-router-dom';
 import AddList from '../componants/Board/AddList';
 import { Spinner } from '@chakra-ui/react';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
 const BoardPage = () => {
   const pendingBoard = useSelector((state) => state.Board.pendingBoard);
@@ -18,14 +19,15 @@ const BoardPage = () => {
   useEffect(() => {
     if (!board || board._id !== id) dispatch(getBoard(id));
   }, [id]);
-
   const DragEndHandler = (e) => {
-    const { active, over } = e;
-    if (active.id !== over.id) {
-      const oldIndex = board.lists.findIndex((list) => list._id === active.id);
-      const newIndex = board.lists.findIndex((list) => list._id === over.id);
+    console.log(e);
+    const { draggableId, destination, source } = e;
+    if (source.index !== destination.index) {
+      console.log('droping');
+      const oldIndex = source.index;
+      const newIndex = destination.index;
       const data = {
-        list_id: active.id,
+        list_id: draggableId,
         board_id: board._id,
         position: newIndex,
       };
@@ -48,12 +50,32 @@ const BoardPage = () => {
   }
   return (
     <div className="flex flex-1 items-start py-3 px-3 gap-8 bg-red-200">
-      <div className="flex items-start flex-wrap gap-3">
-        {board &&
-          board.lists.map((list, index) => (
-            <ListCard key={index} list={list} />
-          ))}
-      </div>
+      <DragDropContext onDragEnd={DragEndHandler}>
+        <Droppable direction="horizontal" droppableId="lists" type="group">
+          {(provided) => (
+            <div
+              className="flex items-start flex-wrap gap-3"
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            >
+              {board &&
+                board.lists.map((list, index) => {
+                  return (
+                    <Draggable
+                      key={list._id}
+                      draggableId={list._id}
+                      index={index}
+                    >
+                      {(provided) => (
+                        <ListCard key={index} list={list} provided={provided} />
+                      )}
+                    </Draggable>
+                  );
+                })}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
       <AddList id={board ? board._id : null} />
     </div>
   );

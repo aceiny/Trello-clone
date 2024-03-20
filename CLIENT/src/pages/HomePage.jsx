@@ -18,7 +18,7 @@ const HomePage = () => {
       <div className="flex gap-8 justify-center">
         <Sidebar />
         {pendingBoards ? (
-          <BoardSkeleton/>
+          <BoardSkeleton />
         ) : (
           boards && <BoardList boards={boards} />
         )}

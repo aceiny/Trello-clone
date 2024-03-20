@@ -2,6 +2,7 @@ import { Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addBoard } from '../../store/reducers/board.reducer';
+import { toastFNC } from '../../config/toast';
 export const NavCreate = () => {
   const dispatch = useDispatch();
   const [boardName, setboardName] = useState('');

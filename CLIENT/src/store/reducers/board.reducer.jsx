@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { api } from '../../config';
 import { toastFNC } from '../../config/toast';
-import { arrayMove } from '@dnd-kit/sortable';
 
 export const addBoard = createAsyncThunk('board/addBoard', async (data) => {
   try {
@@ -118,7 +117,15 @@ const boardSlice = createSlice({
   reducers: {
     reorderList: (state, action) => {
       const { oldIndex, newIndex } = action.payload;
-      state.board.lists = arrayMove(state.board.lists, oldIndex, newIndex);
+      state.board.lists = state.board.lists.map((list, index) => {
+        if (index === oldIndex) {
+          return state.board.lists[newIndex];
+        }
+        if (index === newIndex) {
+          return state.board.lists[oldIndex];
+        }
+        return list;
+      });
     },
   },
   extraReducers: (builder) => {
