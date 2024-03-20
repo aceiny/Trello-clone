@@ -53,22 +53,15 @@ const BoardPage = () => {
     );
   }
   return (
-    <DndContext collisionDetection={closestCenter} onDragEnd={DragEndHandler}>
       <div className="flex flex-1 items-start py-3 px-3 gap-8 bg-red-200">
         <div className="flex items-start flex-wrap gap-3">
-          <SortableContext
-            items={board ? board.lists.map((list) => String(list._id)) : []}
-            strategy={horizontalListSortingStrategy}
-          >
             {board &&
               board.lists.map((list, index) => (
                 <ListCard key={index} list={list} />
               ))}
-          </SortableContext>
         </div>
         <AddList id={board ? board._id : null} />
       </div>
-    </DndContext>
   );
 };
 
