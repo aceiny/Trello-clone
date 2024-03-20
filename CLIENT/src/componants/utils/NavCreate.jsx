@@ -12,7 +12,7 @@ export const NavCreate = () => {
   return (
     <Menu>
       <MenuButton>
-        <button className="shadow-[0_4px_14px_0_rgb(0,118,255,39%)] hover:shadow-[0_6px_20px_rgba(0,118,255,23%)] hover:bg-[rgba(0,118,255,0.9)] px-4 py-2 bg-[#0070f3] rounded-md text-black font-[600] transition duration-200 ease-linear">
+        <button className="shadow-[0_4px_14px_0_rgb(0,118,255,39%)] hover:shadow-[0_6px_20px_rgba(0,118,255,23%)] hover:bg-[rgba(0,118,255,0.9)] px-4 py-2 bg-[#0070f3] rounded-md text-black font-[500] transition duration-200 ease-linear">
           Create
         </button>
       </MenuButton>
