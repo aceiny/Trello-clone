@@ -270,7 +270,7 @@ GET /card/all/:listId  'require auth'
 #### Create Card
 
 ```http
-GET /card/all/:listId  'require auth'
+POST /card/:listId  'require auth'
 ```
 
 | Parameter | Type      |
