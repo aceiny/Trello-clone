@@ -8,7 +8,6 @@ const Login = () => {
     const username = e.target.username.value;
     const password = e.target.password.value;
     dispatch(lg({ username, password }));
-    console.log(username, password);
   };
   return (
     <form

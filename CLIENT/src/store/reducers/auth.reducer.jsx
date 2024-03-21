@@ -74,11 +74,12 @@ const authSlice = createSlice({
       })
       .addCase(Signup.fulfilled, (state, action) => {
         state.pendingAuth = false;
+        console.log(action.payload)
         if (action.payload.status === 201) {
           toastFNC('Signup Success', 'success');
         } else if (action.payload.status === 400) {
           toastFNC(action.payload.data.message[0], 'error');
-        } else if (action.payload.status === 401) {
+        } else{
           toastFNC(action.payload.data.message, 'error');
         }
       });

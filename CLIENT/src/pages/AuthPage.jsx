@@ -10,18 +10,18 @@ const AuthPage = () => {
         <div className="flex items-center gap-6">
           <button
             onClick={() => setView(false)}
-            className=" bg-blue-500 px-4 py-2 rounded-xl cursor-pointer text-white font-[700] "
+            className={`px-4 py-2 rounded-xl cursor-pointer  font-[700] ${!view ? "bg-blue-500 text-white " : "bg-transparent text-black"} `}
           >
             Login
           </button>
           <button
             onClick={() => setView(true)}
-            className=" bg-cyan-300 px-4 py-2 rounded-xl cursor-pointer text-black font-[700]"
+            className={` bg-blue-500 px-4 py-2 rounded-xl cursor-pointer font-[700] ${view ? "bg-blue-500 text-white" : "bg-transparent text-black"} `}
           >
             Signup
           </button>
         </div>
-        {view ? <Signup /> : <Login />}
+        {view ? <Signup handler={setView} /> : <Login />}
       </div>
     </div>
   );
