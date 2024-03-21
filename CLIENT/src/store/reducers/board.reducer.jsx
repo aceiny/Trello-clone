@@ -111,7 +111,7 @@ const initialState = {
   pendingBoard: false,
   pendingAddBoard: false,
   pendingCard: false,
-  fetchErr : false ,
+  fetchErr: false,
 };
 
 const boardSlice = createSlice({
@@ -135,18 +135,17 @@ const boardSlice = createSlice({
     builder
       .addCase(getBoards.pending, (state) => {
         state.pendingBoards = true;
-        state.fetchErr = false
+        state.fetchErr = false;
       })
       .addCase(getBoards.fulfilled, (state, action) => {
         state.pendingBoards = false;
-        console.log('1')
+        console.log('1');
         if (action.payload.status === 200) {
           state.boards = action.payload.data;
-          state.fetchErr = false
-        }
-        else {
+          state.fetchErr = false;
+        } else {
           toastFNC('invalid session', 'error');
-          state.fetchErr = true
+          state.fetchErr = true;
         }
       })
       .addCase(getBoards.rejected, (state) => {

@@ -29,7 +29,8 @@ export const getUser = createAsyncThunk('auth/getUser', async (data) => {
     return res;
   } catch (err) {
     return err.response;
-}})
+  }
+});
 const initialState = {
   authenticated: localStorage.getItem('token') ? true : false,
   user: null,

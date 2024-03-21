@@ -11,6 +11,7 @@ import AddList from '../componants/Board/AddList';
 import { Spinner } from '@chakra-ui/react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { getRandomColor as bg } from '../config/Colors';
+import NavBar from '../componants/NavBar';
 
 const BoardPage = () => {
   const pendingBoard = useSelector((state) => state.Board.pendingBoard);
@@ -55,51 +56,54 @@ const BoardPage = () => {
     );
   }
   return (
-    <div
-      style={{
-        background:
-          'linear-gradient(145deg, ' +
-          bgColors.color1 +
-          ', ' +
-          bgColors.color2 +
-          ')',
-      }}
-      className="flex flex-1 items-start py-3 px-3 gap-8"
-    >
-      <div className="w-full">
-        <DragDropContext onDragEnd={DragEndHandler}>
-          <Droppable direction="horizontal" droppableId="lists" type="group">
-            {(provided) => (
-              <div
-                className="flex items-start flex-wrap gap-3"
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-              >
-                {board &&
-                  board.lists.map((list, index) => {
-                    return (
-                      <Draggable
-                        key={list._id}
-                        draggableId={list._id}
-                        index={index}
-                      >
-                        {(provided) => (
-                          <ListCard
-                            key={index}
-                            list={list}
-                            provided={provided}
-                          />
-                        )}
-                      </Draggable>
-                    );
-                  })}
-                <AddList id={board ? board._id : null} />
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
+    <>
+      <NavBar />
+      <div
+        style={{
+          background:
+            'linear-gradient(145deg, ' +
+            bgColors.color1 +
+            ', ' +
+            bgColors.color2 +
+            ')',
+        }}
+        className="flex flex-1 items-start py-3 px-3 gap-8"
+      >
+        <div className="w-full">
+          <DragDropContext onDragEnd={DragEndHandler}>
+            <Droppable direction="horizontal" droppableId="lists" type="group">
+              {(provided) => (
+                <div
+                  className="flex items-start flex-wrap gap-3"
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                >
+                  {board &&
+                    board.lists.map((list, index) => {
+                      return (
+                        <Draggable
+                          key={list._id}
+                          draggableId={list._id}
+                          index={index}
+                        >
+                          {(provided) => (
+                            <ListCard
+                              key={index}
+                              list={list}
+                              provided={provided}
+                            />
+                          )}
+                        </Draggable>
+                      );
+                    })}
+                  <AddList id={board ? board._id : null} />
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
