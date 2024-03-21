@@ -3,7 +3,12 @@ import searchIcon from '../assets/icons/search.svg';
 import { Link } from 'react-router-dom';
 import { NavCreate } from './utils/NavCreate';
 import logo from '../assets/logo.png';
+import { Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
+import { LogOut } from 'lucide-react';
+import { useDispatch } from 'react-redux';
+import { logout } from '../store/reducers/auth.reducer';
 const NavBar = () => {
+  const dispatch = useDispatch()
   const navs = [
     {
       title: 'Workspace',
@@ -57,11 +62,21 @@ const NavBar = () => {
           />
         </div>
         <div>
-          <img
-            src="https://avatars.githubusercontent.com/u/112300561?v=4"
+          <Menu>
+            <MenuButton>
+            <img
+            src='https://xf-assets.pokecharms.com/data/attachment-files/2015/10/236933_Charmander_Picture.png'
             alt="profile"
             className="w-7 border h-7 rounded-full object-cover"
           />
+            </MenuButton>
+            <MenuList>
+              <MenuItem onClick={()=> dispatch(logout())} className=' text-black flex items-center gap-2'>
+                <LogOut size={16} />
+              logout
+              </MenuItem>
+            </MenuList>
+          </Menu>
         </div>
       </article>
     </nav>

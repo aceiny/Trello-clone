@@ -44,6 +44,7 @@ const authSlice = createSlice({
       state.authenticated = false;
       state.user = null;
       localStorage.removeItem('token');
+      toastFNC('logged out' , 'success')
     },
   },
   extraReducers: (builder) => {

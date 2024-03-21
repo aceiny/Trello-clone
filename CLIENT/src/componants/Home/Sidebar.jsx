@@ -24,7 +24,7 @@ export default function Sidebar() {
         <p className="text-[14px] font-[400] px-3">Workspace</p>
         <div className="HomeSideBarNav items-center justify-start gap-3 flex text-start">
           <img
-            src="https://avatars.githubusercontent.com/u/112300561?v=4"
+            src="https://xf-assets.pokecharms.com/data/attachment-files/2015/10/236933_Charmander_Picture.png"
             alt="image"
             className="rounded-md h-8 w-8"
           />
