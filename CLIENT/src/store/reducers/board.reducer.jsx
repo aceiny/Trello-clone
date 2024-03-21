@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { api } from '../../config';
 import { toastFNC } from '../../config/toast';
+import { logout } from './auth.reducer';
 
 export const addBoard = createAsyncThunk('board/addBoard', async (data) => {
   try {
@@ -110,6 +111,7 @@ const initialState = {
   pendingBoard: false,
   pendingAddBoard: false,
   pendingCard: false,
+  fetchErr : false ,
 };
 
 const boardSlice = createSlice({
@@ -133,16 +135,23 @@ const boardSlice = createSlice({
     builder
       .addCase(getBoards.pending, (state) => {
         state.pendingBoards = true;
+        state.fetchErr = false
       })
       .addCase(getBoards.fulfilled, (state, action) => {
         state.pendingBoards = false;
+        console.log('1')
         if (action.payload.status === 200) {
           state.boards = action.payload.data;
+          state.fetchErr = false
+        }
+        else {
+          toastFNC('invalid session', 'error');
+          state.fetchErr = true
         }
       })
       .addCase(getBoards.rejected, (state) => {
         state.pendingBoards = false;
-        toastFNC('Boards Fetch Failed', 'error');
+        toastFNC('Boards aFetch Failed', 'error');
       })
       .addCase(getBoard.pending, (state) => {
         state.pendingBoard = true;
