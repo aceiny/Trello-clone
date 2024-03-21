@@ -8,7 +8,7 @@ import { LogOut } from 'lucide-react';
 import { useDispatch } from 'react-redux';
 import { logout } from '../store/reducers/auth.reducer';
 const NavBar = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const navs = [
     {
       title: 'Workspace',
@@ -64,16 +64,19 @@ const NavBar = () => {
         <div>
           <Menu>
             <MenuButton>
-            <img
-            src='https://xf-assets.pokecharms.com/data/attachment-files/2015/10/236933_Charmander_Picture.png'
-            alt="profile"
-            className="w-7 border h-7 rounded-full object-cover"
-          />
+              <img
+                src=" https://xsgames.co/randomusers/avatar.php?g=pixel "
+                alt="profile"
+                className="w-7 border h-7 rounded-full object-cover"
+              />
             </MenuButton>
             <MenuList>
-              <MenuItem onClick={()=> dispatch(logout())} className=' text-black flex items-center gap-2'>
+              <MenuItem
+                onClick={() => dispatch(logout())}
+                className=" text-black flex items-center gap-2"
+              >
                 <LogOut size={16} />
-              logout
+                logout
               </MenuItem>
             </MenuList>
           </Menu>
